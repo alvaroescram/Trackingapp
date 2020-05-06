@@ -1,0 +1,19 @@
+.column {
+    float: left;
+    width: 50%;
+    height: 10%;
+}
+.row:after {
+    clear: both;
+    display: table;
+    content: "";
+}
+.graph-container{
+    margin: auto;
+    width: 33%;
+    margin-top: 10px;
+}
+iframe {
+    height: 300px;
+    width: 100%;
+}
