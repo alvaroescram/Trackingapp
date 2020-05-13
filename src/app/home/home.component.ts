@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SignupService } from '../auth/signup/signup.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  islogged = false;
 
-  constructor() { }
+  constructor(private signupService: SignupService) { }
 
   ngOnInit(): void {
+    this.islogged = this.signupService.isLoggedIn();
+    console.log(this.islogged);
   }
 
 }

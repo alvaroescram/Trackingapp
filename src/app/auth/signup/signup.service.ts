@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Person } from 'src/app/data-models/Person';
+import { AnimalService } from 'src/app/data-models/animal.service';
 
 let incrementID = 0;
 let currentSession = 0; // usuario actual
@@ -11,7 +12,7 @@ let currentSession = 0; // usuario actual
 export class SignupService {
   persons: Array<Person> = [
     // alumno de prueba
-    {
+    /*{
       personId: 0,
       fullname: 'Test usuario',
       email: 'prueba@test.com',
@@ -19,12 +20,24 @@ export class SignupService {
       country: 'Mexico',
       password: '12345',
       twitterAt: 'test',
-      ownedAnimals: '',
-      terrainNodes: ''
-    }
+      ownedAnimals: [],
+      terrainNodes: []
+    }*/
+    new Person(
+      0,
+      'Test usuario',
+      'prueba@test.com',
+      'rancho genérico',
+      'Mexico',
+      '12345',
+      'test',
+      [],
+      []
+    )
   ];
 
-  constructor() { }
+  constructor(private animalService: AnimalService/*,
+              private terrainService: TerrainService*/) { }
 
   generateID(): number {
     incrementID++;
@@ -32,7 +45,7 @@ export class SignupService {
   }
 
   createPerson(objct) {
-    objct.id = this.generateID();
+    objct.personId = this.generateID();
     // objct.rol = 1; para admin
     console.log(objct);
     this.savePerson(objct);
@@ -63,14 +76,22 @@ export class SignupService {
     currentSession = 0;
   }
 
-  getCurrentPerson(): Person {
-    console.log('Current user logged: ', currentSession);
-    console.log(this.getPerson(currentSession));
-    return this.getPerson(currentSession);
+  getCurrentSession(): number {
+    return currentSession;
   }
 
-  getPerson(id: number): Person {
+  getCurrentPerson(): Person {
+    console.log('Current user logged: ', currentSession);
+    console.log(this.getPersonbyId(currentSession));
+    return this.getPersonbyId(currentSession);
+  }
+
+  getPersonbyId(id: number): Person {
     return this.persons[id];
+  }
+
+  getPersonbyEmail(email: string) {
+    return this.persons.find(person => person.email === email);
   }
 
   getPersons(): Array<Person> {
@@ -78,5 +99,20 @@ export class SignupService {
     return this.persons.slice();
   }
 
+  changePersonPassword(id: number, newpassword: string) {
+    this.persons[id].password = newpassword;
+    console.log(this.persons[id]);
+  }
 
+  modifyPerson(person: Person) {
+    const aux: Person = this.getPersonbyId(person.personId);
+    aux.fullname = person.fullname;
+    aux.terrainName = person.terrainName;
+    aux.email = person.email;
+    aux.twitterAt = person.twitterAt;
+    aux.country = person.country;
+
+    this.persons[person.personId] = aux;
+    console.log('Persona modificada:', this.persons[person.personId]);
+  }
 }

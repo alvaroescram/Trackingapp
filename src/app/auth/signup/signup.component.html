@@ -31,42 +31,63 @@
                     <div class="form-group row">
                         <label for="inputFullName" class="col-sm-2 col-form-label">Nombre completo</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="persona"  placeholder='Nombre completo'> <!--[(ngModel)]="persona.fullname"-->
+                            <input type="text" class="form-control" required name="persona" [(ngModel)]="persona.fullname" placeholder='Nombre completo'>
+                        </div>
+                        <div class="empty" *ngIf="emptyname">
+                            <p>El nombre no puede estar vacío</p>
                         </div>
                     </div>
     
                     <div class="form-group row">
                         <label for="inputMail" class="col-sm-2 col-form-label">Correo electrónico</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" name="persona"  placeholder='Email'> <!--[(ngModel)]="persona.email"-->
+                            <input type="email" class="form-control"  name="persona" [(ngModel)]="persona.email" placeholder='Email' required>
+                        </div>
+                        <div class="exists" *ngIf="exists">
+                            <p>Ya existe una cuenta con este correo.</p>
+                        </div>
+                        <div class="empty" *ngIf="emptyemail">
+                            <p>El correo electrónico no puede estar vacío.</p>
+                        </div>
+                        <div class="empty" *ngIf="notemail">
+                            <p>Inserte un correo electrónico con el formato adecuado.</p>
                         </div>
                     </div>
                      
                     <div class="form-group row">
-                        <label for="inputTerrainName" class="col-sm-2 col-form-label">Nombre de propiedad</label>
+                        <label for="inputTerrainName" class="col-sm-2 col-form-label">Nombre de propiedad (Opcional)</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="persona"  placeholder='Nombre de propiedad'> <!--[(ngModel)]="persona.terrainName"-->
+                            <input type="text" class="form-control" name="persona" [(ngModel)]="persona.terrainName" placeholder='Nombre de propiedad'>
                         </div>
                     </div>
                 
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Contraseña</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" name="persona"  placeholder='Contraseña'> <!--[(ngModel)]="persona.password"-->
+                            <input type="password" class="form-control" required minlength="5" name="persona" [(ngModel)]="persona.password" placeholder='Contraseña'>
+                        </div>
+                        <div class="empty" *ngIf="emptypassword">
+                            <p>La contraseña no puede estar vacía.</p>
+                        </div>
+                        <div class="empty" *ngIf="shortpassword">
+                            <p>La contraseña debe tener por lo menos 5 caracteres de longitud.</p>
                         </div>
                     </div>
                    
                     <div class="form-group row">
                         <label for="inputCountry" class="col-sm-2 col-form-label">País</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="persona"  placeholder='País'> <!--[(ngModel)]="persona.country"-->
+                            <input type="text" class="form-control" required name="persona" [(ngModel)]="persona.country" placeholder='País'>
+                        </div>
+                        <div class="empty" *ngIf="emptycountry">
+                            <p>El país no puede estar vacío.</p>
                         </div>
                     </div>
     
                     <div class="form-group row">
-                        <label for="inputTwitter" class="col-sm-2 col-form-label">Twitter</label>
+                        <label for="inputTwitter" class="col-sm-2 col-form-label">Twitter (Opcional)</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="persona"  placeholder='Cuenta de Twitter (opcional)'> <!--[(ngModel)]="persona.twitterAt"-->
+                            <input type="text" class="form-control" name="persona" [(ngModel)]="persona.twitterAt" placeholder='Cuenta de Twitter (opcional)'>
                         </div>
                     </div>
                     

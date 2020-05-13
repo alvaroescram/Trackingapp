@@ -9,97 +9,6 @@
     
     <!--Fontawesome CDN-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-	<style>
-		
-html,body{
-/*background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');*/
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
-font-family: 'Numans', sans-serif;
-}
-.container{
-    padding-top: 20px   ;
-    float: left;
-    height: 100%;
-    align-content: center;
-}
-
-.card{
-height: 370px;
-margin-top: auto;
-margin-bottom: auto;
-width: 400px;
-padding-top: 2px;
-background-color: rgba(252, 248, 248, 0.5) !important;
-}
-
-.social_icon span{
-font-size: 60px;
-margin-left: 10px;
-color: rgb(0, 128, 255);
-}
-
-.social_icon span:hover{
-color: black;
-cursor: pointer;
-}
-
-.card-header h3{
-color: black;
-}
-
-.social_icon{
-position: absolute;
-right: 20px;
-top: -45px;
-}
-
-.input-group-prepend span{
-width: 50px;
-color: rgb(0, 128, 255);
-color: black;
-border:0 !important;
-}
-
-input:focus{
-outline: 0 0 0 0  !important;
-box-shadow: 0 0 0 0 !important;
-
-}
-
-.remember{
-color: black;
-}
-
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
-}
-
-.btn-primary{
-color: black;
-color: rgb(0, 128, 255);
-width: 100px;
-}
-
-.btn-primary:hover{
-color: black;
-background-color: white;
-}
-
-.links{
-color: black;
-}
-
-.links a{
-margin-left: 4px;
-}
-	</style>
 </head>
 <body>
 	<div class="container">
@@ -115,20 +24,33 @@ margin-left: 4px;
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
-							<input type="text" class="form-control" placeholder="username">						
+							<input type="email" id="email" name="email" class="form-control" 
+								[(ngModel)]="email" #name="ngModel" placeholder='email'>		
 						</div>
-
+						<div class="empty" *ngIf="emptyemail">
+							<p>Inserte dirección de correo.</p>
+						</div>
+						<div class="empty" *ngIf="exists">
+							<p>No existe una cuenta con ese correo electrónico</p>
+						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-							<input type="password" class="form-control" placeholder="password">
+							<input type="password" id="password" name="password" class="form-control" 
+								required minlength="5" [(ngModel)]="password" #name="ngModel" placeholder='password'>
 						</div>
-
+						<div class="empty" *ngIf="emptypassword">
+							<p>La contraseña no puede estar vacía.</p>
+						</div>
+						<div class="empty" *ngIf="wrongpassword">
+							<p>La contraseña no es correcta</p>
+						</div>
+						<!-- 
 						<div class="row align-items-center remember">
 							<input type="checkbox">Remember Me
-						</div>
-						
+						</div>						
+						-->
 						<div class="form-group">
 							<input type="submit" value="Login" class="btn float-right login_btn">
 						</div>
@@ -141,9 +63,44 @@ margin-left: 4px;
 					</div>
 					
 					<div class="d-flex justify-content-center">
-						<a href="#">¿Olvidó su contraseña?</a>
+						<div class="passwordlink">
+							<a (click)="clickPasswordChange()">¿Olvidó su contraseña?</a>
+						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" *ngIf="changingPassword">
+		<div class="d-flex justify-content-center h-100">
+			<div class="card">
+				<div class="card-header">
+					<h3>Cambiando contraseña para:</h3>
+				</div>				
+				<div class="card-body">
+					<div class="passchange">
+						<form (submit)="changePassword($event)">
+							<div class="input-group form-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-user"></i></span>
+								</div>
+								<input type="email" id="email" name="email" class="form-control" [(ngModel)]="email" #name="ngModel" placeholder='email'>
+							</div>
+							<div class="input-group form-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+								<input type="password" id="newpassword" name="newpassword" class="form-control" required minlength="5" [(ngModel)]="newpassword" #name="ngModel" placeholder='Nueva contraseña'>
+								<div class="empty" *ngIf="matchingpasswords">
+									<p>La constraseña no puede ser igual a la contraseña actual.</p>
+								</div>
+							</div>							
+							<button>Cambiar</button>
+						</form>
+					</div>
+				</div>
+				<div class="card-footer"></div>
 			</div>
 		</div>
 	</div>

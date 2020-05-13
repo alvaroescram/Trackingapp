@@ -5,7 +5,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <div class="menus">
+  <div class="editing">
+    <button mat-raised-button color="primary" (click)="editAnimals($event)">Editar mis animales</button>
+  </div>
+  <br>
+  <div class="menus" *ngIf="!editMode">
     <div class="column">
       <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuVariables" data-toggle="dropdown" id="dropdownVariablesButton">
@@ -26,9 +30,12 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownAnimalsButton">
           <!-- ¿lista dinámica de objetos?-->
+          <!-- 
           <li><a class="dropdown-item" href="#">Vaca 1</a></li>
           <li><a class="dropdown-item" href="#">Vaca 2</a></li>
-          <li><a class="dropdown-item" href="#">Vaca 3</a></li>
+          <li><a class="dropdown-item" href="#">Vaca 3</a></li> 
+          -->
+          <option *ngFor="let animal of animals" [value]="animal">{{animal.idsensor}}</option>
           <!--<li class="divider"></li>-->
         </ul>
       </div>
@@ -36,7 +43,12 @@
   </div>
   <br>
   <br>
-  <div class="graph-container">
+  <div class="graph-container" *ngIf="!editMode">
       <iframe src="https://thingspeak.com/channels/1022535/charts/6?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+  </div>
+
+  <!-- Modo de edición. Tablita pra agregar y quitar animales-->
+  <div class="editing-table" *ngIf="editMode">
+    <p>lorem</p>
   </div>
 </body>

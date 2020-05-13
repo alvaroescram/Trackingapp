@@ -20,20 +20,16 @@ body{
     padding-left: 15px;
     box-sizing: border-box;
 }
-.lower{
-    
+.lower{    
     height: 85%;
-    width: 100%;
-    
+    width: 100%;    
 }
-
 .login_btn{
     color: black;
     color: rgb(0, 128, 255);
     width: 100px;
     padding-bottom: 5px;
 }
-
 .login_btn:hover{
     color: black;
     background-color: white;
@@ -50,4 +46,7 @@ body{
     width: 90%;
     float: left;
     box-sizing: border-box;
+}
+.empty {
+    color: red;
 }

@@ -87,3 +87,10 @@ color: black;
 .links a{
 margin-left: 4px;
 }
+
+.empty{
+color: red;
+}
+.passwordlink a{
+    text-decoration: underline;
+}

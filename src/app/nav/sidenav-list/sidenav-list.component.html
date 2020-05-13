@@ -1,0 +1,23 @@
+<head>
+</head>
+<body>
+    <a mat-list-item routerLink ="/login" (click)="close()" *ngIf="!isLogged">
+        <mat-icon>input</mat-icon>
+        <span>Iniciar sesión</span>
+    </a>
+    <br>
+    <a mat-list-item routerLink ="/signup" (click)="close()" *ngIf="!isLogged">
+        <mat-icon>account_circle</mat-icon>
+        <span>Registrar cuenta</span>
+    </a>
+    <br>
+    <a mat-list-item routerLink ="/profile" (click)="close()" *ngIf="isLogged">
+        <mat-icon>assignment_ind</mat-icon>
+        <span>Mi Perfil</span>
+    </a>
+    <br>
+    <a mat-list-item routerLink="/" (click)="close()" *ngIf="isLogged">
+        <mat-icon>cancel</mat-icon>
+        <span>Cerrar sesión</span>
+    </a>
+</body>
