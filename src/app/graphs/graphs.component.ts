@@ -10,6 +10,9 @@ import { Animal } from '../data-models/Animal';
 export class GraphsComponent implements OnInit {
   animals: Array<Animal> = [];
   editMode: boolean;
+  latselect = false;
+  longselect = false;
+  tempselect = false;
 
   constructor(private animalService: AnimalService) { }
 
@@ -25,6 +28,26 @@ export class GraphsComponent implements OnInit {
     } else {
       this.editMode = true;
     }
+  }
+
+  selectLat() {
+    this.latselect = true;
+    this.longselect = false;
+    this.tempselect = false;
+    console.log('Selección latitud:', this.latselect);
+  }
+
+  selectLong() {
+    this.latselect = false;
+    this.longselect = true;
+    this.tempselect = false;
+    console.log('Selección longitud:', this.longselect);
+    }
+  selectTemp() {
+    this.latselect = false;
+    this.longselect = false;
+    this.tempselect = true;
+    console.log('Selección temperatura:', this.tempselect);
   }
 
 
