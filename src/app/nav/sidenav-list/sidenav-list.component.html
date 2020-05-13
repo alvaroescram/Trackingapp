@@ -16,7 +16,7 @@
         <span>Mi Perfil</span>
     </a>
     <br>
-    <a mat-list-item routerLink="/" (click)="close()" *ngIf="isLogged">
+    <a mat-list-item routerLink="/" (click)="close(); logout()" *ngIf="isLogged">
         <mat-icon>cancel</mat-icon>
         <span>Cerrar sesión</span>
     </a>

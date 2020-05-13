@@ -25,4 +25,7 @@ export class SidenavListComponent implements OnInit {
     this.ToggleClose.emit();
   }
 
+  logout() {
+    this.signupService.logoutUser();
+  }
 }
